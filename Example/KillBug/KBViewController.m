@@ -7,7 +7,6 @@
 //
 
 #import "KBViewController.h"
-#import <KillBug/KBAutoTrackManager.h>
 
 @interface KBViewControllerA:UIViewController<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,9 +22,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [KBAutoTrackManager shared];
     
-    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 330, 100, 100)];
+    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 430, 100, 100)];
     [btn1 setTitle:@"小明" forState:(UIControlStateNormal)];
     btn1.backgroundColor  = [UIColor redColor];
     [self.view addSubview:btn1];
@@ -43,11 +41,15 @@
 - (IBAction)btnAAction:(id)sender {
     
 }
+- (IBAction)manualCrash:(id)sender {
+    NSArray *arr = @[@0];
+    arr[1];
+}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    KBViewControllerA *vc = [[KBViewControllerA alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [self presentViewController:nav animated:true completion:nil];
+    KBViewControllerA *vc = [[KBViewControllerA alloc] init];
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:vc animated:true completion:nil];
 }
 @end
 
@@ -74,7 +76,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.navigationController popViewControllerAnimated:true];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -11,20 +11,36 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^DebugInfoHandler)(NSString *info);
+
 @interface KBAutoTrackManager : NSObject
+
+@property(nonatomic,strong)DebugInfoHandler infoHandler;
+
+///单例
 + (instancetype)shared;
+
 /// 普通 UIControl
 - (void)trackEventView:(UIView *)view;
+
 /// tableview&collectionview
 - (void)trackEventView:(UIView *)view withIndexPath:(nullable NSIndexPath *)indexPath;
-/// viewcontroller
-- (void)trackViewControlWillAppear:(UIViewController *)controller;
+
+/// viewWillAppear
+- (void)trackViewWillAppear:(UIViewController *)controller;
+
 /// uiapplication 活跃状态
 - (void)trackApplication:(NSString *)state;
+
 /// uiapplication 死亡信息
 - (void)trackApplicationDeadReason:(NSString *)reason;
+
 /// 用户的touch事件
 - (void)trackTouch:(NSString *)info;
+
+/// 日志回调
+- (void)debugInfoHandler:(DebugInfoHandler)handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

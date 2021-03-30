@@ -33,32 +33,44 @@
 }
 /// 普通 UIControl 支持xib拖出来的
 - (void)trackEventView:(UIView *)view {
-    NSLog(@"click: %@ txt:%@",view.class,[KBAutoTrackManager getText:view]);
+    NSString *str = [[NSString alloc] initWithFormat:@"click: %@ txt:%@",view.class,[KBAutoTrackManager getText:view]];
+    self.infoHandler(str);
 }
 /// tableview&collectionview
 - (void)trackEventView:(UIView *)view withIndexPath:(nullable NSIndexPath *)indexPath {
-    NSLog(@"click: %@ row: %ld section: %ld",view.class,(long)indexPath.row,(long)indexPath.section);
+    NSString *str = [[NSString alloc] initWithFormat:@"click: %@ row: %ld section: %ld",view.class,(long)indexPath.row,(long)indexPath.section];
+    self.infoHandler(str);
 }
 /// viewcontroller
-- (void)trackViewControlWillAppear:(UIViewController *)controller {
+- (void)trackViewWillAppear:(UIViewController *)controller {
     if ([self shouldTrackViewContrller:[controller class]]){
-        NSLog(@"will appear: %@",[self titleFromViewController:controller]);
+        NSString *str = [[NSString alloc] initWithFormat:@"will appear: %@",[self titleFromViewController:controller]];
+        self.infoHandler(str);
     }
 }
 /// application 活跃状态
 - (void)trackApplication:(NSString *)state;{
-    NSLog(@"app state: %@",state);
+    NSString *str = [[NSString alloc] initWithFormat:@"app state: %@",state];
+    self.infoHandler(str);
 }
 /// app 死亡信息
 - (void)trackApplicationDeadReason:(NSString *)reason;{
-    NSLog(@"app crash: %@",reason);
+    NSString *str = [[NSString alloc] initWithFormat:@"app crash: %@",reason];
+    self.infoHandler(str);
 }
 - (void)trackTouch:(NSString *)info;{
-    NSLog(@"touch: %@",info);
+    NSString *str = [[NSString alloc] initWithFormat:@"touch: %@",info];
+    self.infoHandler(str);
 }
 - (BOOL)shouldTrackViewContrller:(Class)aClass {
     return ![KBTrackConfig.controllers containsObject:NSStringFromClass(aClass)];
 }
+
+- (void)debugInfoHandler:(DebugInfoHandler)handler;{
+    self.infoHandler = handler;
+}
+
+
 // tableview collectionview
 - (void)swizzleSelected:(UIView *)view delegate:(id)delegate {
     if ([view isKindOfClass:[UITableView class]]

@@ -7,12 +7,18 @@
 //
 
 #import "UIAppDelegate.h"
+#import <KillBug/KBAutoTrackManager.h>
 
 @implementation UIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    KBAutoTrackManager *manager = [KBAutoTrackManager shared];
+    [manager debugInfoHandler:^(NSString * _Nonnull info) {
+        NSLog(@"%@", info);
+        /// Custom
+    }];
     return YES;
 }
 

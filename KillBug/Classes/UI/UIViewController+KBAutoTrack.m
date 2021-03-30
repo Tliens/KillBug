@@ -11,7 +11,7 @@
 @implementation UIViewController (KBAutoTrack)
 
 - (void)kb_autotrack_viewWillAppear:(BOOL)animated; {
-    [[KBAutoTrackManager shared] trackViewControlWillAppear:self];
+    [[KBAutoTrackManager shared] trackViewWillAppear:self];
     [self kb_autotrack_viewWillAppear:animated];
 }
 
