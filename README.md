@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/cocoapods/l/KillBug.svg?style=flat)](https://cocoapods.org/pods/KillBug)
 [![Platform](https://img.shields.io/cocoapods/p/KillBug.svg?style=flat)](https://cocoapods.org/pods/KillBug)
 
+![img](https://github.com/Tliens/KillBug/blob/main/logo.png)
+
 此工具用来收集用户操作步骤：
 - 1、可用于bug复现，问题排查
 - 2、分析用户操作日志
