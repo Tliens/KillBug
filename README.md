@@ -6,26 +6,51 @@
 [![Platform](https://img.shields.io/cocoapods/p/KillBug.svg?style=flat)](https://cocoapods.org/pods/KillBug)
 
 此工具用来收集用户操作步骤：
-1、可用于bug复现，问题排查
-2、分析用户操作日志
+- 1、可用于bug复现，问题排查
+- 2、分析用户操作日志
 
 采用 runtime method swizzle 实现，为了不影响app的启动速度，method swizzle 需要手动开启。
 
 目前支持采集如下内容：
 
 ```
+///单例
++ (instancetype)shared;
+
 /// 普通 UIControl
 - (void)trackEventView:(UIView *)view;
+
 /// tableview&collectionview
 - (void)trackEventView:(UIView *)view withIndexPath:(nullable NSIndexPath *)indexPath;
+
 /// viewWillAppear
 - (void)trackViewWillAppear:(UIViewController *)controller;
+
 /// uiapplication 活跃状态
 - (void)trackApplication:(NSString *)state;
+
 /// uiapplication 死亡信息
 - (void)trackApplicationDeadReason:(NSString *)reason;
+
 /// 用户的touch事件
 - (void)trackTouch:(NSString *)info;
+
+/// 日志回调
+- (void)debugInfoHandler:(DebugInfoHandler)handler;
+
+```
+## 使用
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    KBAutoTrackManager *manager = [KBAutoTrackManager shared];
+    [manager debugInfoHandler:^(NSString * _Nonnull info) {
+        NSLog(@"%@", info);
+        /// Custom 
+    }];
+    return YES;
+}
 
 ```
 
