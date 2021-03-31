@@ -107,6 +107,17 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'KillBug'
 ```
+## 我的其他开源框架
+
+- [SpeedySwift 独立开发者必备](https://github.com/Tliens/SpeedySwift)
+
+- [CTNet 这是一个可以指定缓存、重试、优先级的轻量级网络库](https://github.com/ours-curiosity/CTNet)
+
+- [Localizable 国际化方案](https://github.com/Tliens/Localizable)
+
+- [SpeedyMetal Metal 加速框架，GPUImage3的尝试演化](https://github.com/Tliens/SpeedyMetal)
+
+- [GPUImageByMetal  GPUImage 3 中文注释版](https://github.com/Tliens/GPUImageByMetal)
 
 ## Author
 
