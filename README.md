@@ -26,6 +26,8 @@
 
 采用 runtime method swizzle 实现，为了不影响app的启动速度，method swizzle 需要手动开启。
 
+支持Swift、OC以及混编项目。
+
 目前支持采集如下内容：
 
 ```
