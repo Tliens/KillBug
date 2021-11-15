@@ -46,6 +46,10 @@ static IMP __original_TouchesBegan_Method_Imp;
     //获取触摸对象
     UITouch * touch = touches.anyObject;
     CGPoint p = [touch locationInView:touch.view];
+    NSString *content = @"";
+    if ([touch.view isKindOfClass:[UILabel class]]){
+        content = ((UILabel*)touch.view).text;
+    }
     if (touch.tapCount == 1){
         NSString *info = [[NSString alloc] initWithFormat:@"单击 位置 x:%f y:%f",p.x,p.y];
         [[KBAutoTrackManager shared] trackTouch:info];
